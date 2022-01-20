@@ -6,6 +6,8 @@ const session = require('express-session')
 
 //載入路由器
 const router = require('./routes')
+//載入 passport設定檔
+const usePassport = require('./config/passport')
 
 const app = express()
 const PORT = 3000
@@ -24,6 +26,8 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))
 // 設置每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
+//調用usePassport函式，傳入必要參數app
+usePassport(app)
 // 將 request 導入路由器
 app.use(router)
 
