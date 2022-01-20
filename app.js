@@ -2,7 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars').engine
 const methodOverride = require('method-override')
-const bcrypt = require('bcryptjs')
+const session = require('express-session')
 
 //載入路由器
 const router = require('./routes')
@@ -13,6 +13,13 @@ const PORT = 3000
 //設定網頁handlebars相關設定
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
+//設置session
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 // 使用 express內建的body - parser 進行前置處理
 app.use(express.urlencoded({ extended: true }))
 // 設置每一筆請求都會透過 methodOverride 進行前置處理
