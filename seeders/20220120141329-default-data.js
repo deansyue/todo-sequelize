@@ -21,7 +21,7 @@ module.exports = {
       .then(userId => queryInterface.bulkInsert('Todos',
         Array.from({ length: 10 }).map((_, i) => ({
           name: `name-${i}`,
-          UerId: userId,
+          UserId: userId,
           createdAt: new Date(),
           updatedAt: new Date()
         })
