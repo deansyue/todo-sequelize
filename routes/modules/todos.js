@@ -71,7 +71,16 @@ router.put('/:id', (req, res) => {
 
 //設定使用delete後的路由
 router.delete('/:id', (req, res) => {
+  //取得userId id資料
+  const UserId = req.user.id
+  const id = req.params.id
 
+  //查詢到指定資料後，刪除資料
+  return Todo.findOne({ where: { id, UserId } })
+    .then(todo => todo.destroy())
+    //重新導向首頁
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
 })
 
 //匯出模組
