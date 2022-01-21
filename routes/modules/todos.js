@@ -4,7 +4,6 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../../models')
-const User = db.User
 const Todo = db.Todo
 
 //設定new的路由
@@ -20,7 +19,8 @@ router.post('/', (req, res) => {
 //設定detail路徑路由
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  return Todo.findByPk(id)
+  const userId = req.user.id
+  return Todo.findOne({ where: { id, userId } })
     .then(todo => res.render('detail', { todo: todo.toJSON() }))
     .catch(err => console.log(err))
 })

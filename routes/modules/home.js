@@ -4,12 +4,14 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../../models')
-const User = db.User
 const Todo = db.Todo
 
 //首頁路由
 router.get('/', (req, res) => {
+  const userId = req.user.id
+
   return Todo.findAll({
+    where: { userId },
     raw: true,
     nest: true,
   })
