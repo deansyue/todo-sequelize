@@ -60,10 +60,11 @@ router.post('/register', (req, res) => {
           email,
           password: hash
         }))
+        //重新導向首頁
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
     })
-    //重新導向首頁
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+
 })
 
 //設定登出路由
