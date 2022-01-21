@@ -13,12 +13,12 @@ module.exports = app => {
   app.use(passport.session())
 
   //設定本地登入策略
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req, email, password, done) => {
     User.findOne({ where: { email } })
       .then(user => {
         //找不到使用者
         if (!user) {
-          return done(null, false, { message: 'That email is not registered!' })
+          return done(null, false, req.flash('warning_msg', 'Email未被註冊'))
         }
 
         //使用bcrypt比對函式，判斷密碼是否輸入正確
@@ -26,7 +26,7 @@ module.exports = app => {
           .then(isMatch => {
             if (!isMatch) {
               //密碼輸入錯誤時
-              return done(null, false, { message: 'Email or Password incorrect.' })
+              return done(null, false, req.flash('warning_msg', 'Email或password錯誤'))
             }
 
             //密碼輸入正碼時
