@@ -52,7 +52,8 @@ router.post('/register', (req, res) => {
 
 //設定登出路由
 router.get('/logout', (req, res) => {
-  res.render('logout')
+  //req.logout() 是 Passport.js 提供的函式，會清除 session
+  req.logout()
 })
 
 //匯出模組
