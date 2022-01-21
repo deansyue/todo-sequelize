@@ -13,7 +13,20 @@ router.get('/new', (req, res) => {
 
 //設定create功能路由
 router.post('/', (req, res) => {
+  //取得userId與 表單name的值
+  const UserId = req.user.id
+  const name = req.body.name
+  const errors = []
 
+  //若沒有輸入name，渲染new頁面並回傳錯誤訊息
+  if (!name) {
+    errors.push({ message: 'name欄位為必輸入欄位' })
+    return res.render('new', { errors })
+  }
+
+  return Todo.create({ name, UserId })
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
 })
 
 //設定detail路徑路由
