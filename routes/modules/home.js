@@ -8,10 +8,10 @@ const Todo = db.Todo
 
 //首頁路由
 router.get('/', (req, res) => {
-  const userId = req.user.id
+  const UserId = req.user.id
 
   return Todo.findAll({
-    where: { userId },
+    where: { UserId },
     raw: true,
     nest: true,
   })

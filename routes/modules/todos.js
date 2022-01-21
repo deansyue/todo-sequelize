@@ -32,8 +32,8 @@ router.post('/', (req, res) => {
 //設定detail路徑路由
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  const userId = req.user.id
-  return Todo.findOne({ where: { id, userId } })
+  const UserId = req.user.id
+  return Todo.findOne({ where: { id, UserId } })
     .then(todo => res.render('detail', { todo: todo.toJSON() }))
     .catch(err => console.log(err))
 })
