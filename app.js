@@ -10,8 +10,13 @@ const router = require('./routes')
 //載入 passport設定檔
 const usePassport = require('./config/passport')
 
+//若環境非為正式上線模式，則透過dotenv讀取.env檔案
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 
 //設定網頁handlebars相關設定
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -19,7 +24,7 @@ app.set('view engine', 'hbs')
 
 //設置session
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
