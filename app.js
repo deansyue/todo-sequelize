@@ -38,6 +38,9 @@ usePassport(app)
 app.use(flash())
 //設定本地變數
 app.use((req, res, next) => {
+  //放在 res.locals 裡的資料，所有的 view 都可以存取。
+  res.locals.isAuthenticated = req.isAuthenticated
+  res.locals.user = req.user
   //設定success和warning message
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
