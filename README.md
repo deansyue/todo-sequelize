@@ -1,4 +1,4 @@
-# Todo list (update: 2021/1/21)
+# Todo list (update: 2021/1/22)
 這是一個使用node.js及MySQL框架所架構的待辦清單網站，在這裡您可以新增、修改、刪除、瀏覽儲存於資料庫內的待辦事項資料。
 
 ## 專案畫面
@@ -52,6 +52,14 @@ npm run dev
 6. 當終端機(terminal)出現以下文字，代表伺服器已啟動
 ```
 App is running on http://localhost:3000
+```
+
+## 種子資料使用者
+可使用種子資料新增的使用者操作本專案
+```
+root
+  email: root@example.com
+  password: 12345678
 ```
 
 ## Contributor 專案開發人員
